@@ -84,11 +84,18 @@
             if (newWidth == null) {
                 newWidth = s.stickyElement.width();
             }
-            s.stickyElement
-              .css('width', newWidth)
-              .css('position', 'fixed')
-              .css('top', newTop);
-
+            if($('html.touch').length > 0){
+              var startTop = newTop - s.stickyElement.outerHeight();
+              s.stickyElement
+                .css('width', newWidth)
+                .css('position', 'fixed')
+                .css('top', startTop).animate({top: newTop});
+            }else{
+              s.stickyElement
+                .css('width', newWidth)
+                .css('position', 'fixed')
+                .css('top', newTop);
+            }
             s.stickyElement.parent().addClass(s.className);
 
             if (s.currentTop === null) {
